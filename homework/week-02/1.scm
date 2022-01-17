@@ -5,6 +5,7 @@
 ; helper procedures
 (define (next x) (+ x 1.0))
 (define (identity x) x)
+(define (square x) (* x x))
 
 ; returns the product of the values of a function at points over a given range (a, b)
 (define (product term a next b)
@@ -46,4 +47,9 @@
     (f (f x))))
 
 ; 1.43
-()
+(define (compose f g) (lambda (x) (f (g x))))
+
+(define (repeat f n)
+  (if (< n 1)
+      (lambda (x) x)
+      (compose f (repeat f (- n 1)))))
