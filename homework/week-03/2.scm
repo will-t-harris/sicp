@@ -5,6 +5,7 @@
         ((= (remainder n i) 0) (+ i (sum-of-factors n (- i 1))))
         (else (sum-of-factors n (- i 1)))))
 
+; known issue: n must be > 1.
 (define (next-perf-num n)
   (let ((current-sum (sum-of-factors n (- n 1))))
     (cond ((= current-sum n) n)
