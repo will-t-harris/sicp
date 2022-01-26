@@ -1,10 +1,13 @@
 #lang simply-scheme
+;; Rational number constructor
 (define (make-rat n d)
-  (let ((g (gcd n d)))
+  (let ((g ((if (< d 0) - +) (gcd n d))))
     (cons (/ n g) (/ d g))))
 
+;; Rational number numerator selector
 (define (numer x) (car x))
 
+;; Rational number denominator selector
 (define (denom x) (cdr x))
 
 (define (add-rat x y)
@@ -35,11 +38,7 @@
   (display "/")
   (display (denom x)))
 
-(define one-half (make-rat 1 2))
-(print-rat one-half)
-
-(define one-third (make-rat 1 3))
-
-(print-rat (add-rat one-half one-third))
-(print-rat (mul-rat one-half one-third))
-(print-rat (add-rat one-third one-third))
+(make-rat 1 2) "should equal" '(1 . 2) (newline)
+(make-rat -1 2) "should equal" '(-1 . 2) (newline)
+(make-rat 1 -2) "should equal" '(-1 . 2) (newline)
+(make-rat -1 -2) "should equal" '(1 . 2) (newline)
